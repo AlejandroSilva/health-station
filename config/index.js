@@ -17,6 +17,8 @@ if(enviroment==='production') {
     _appConfig = app.development
     _libConfig = lib.development
 }
+
+console.log(`Health Station ${_appConfig.version}`);
 console.log(`Configuración '${enviroment}' cargada.`);
 
 export const appConfig = _appConfig

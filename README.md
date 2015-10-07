@@ -6,15 +6,6 @@ The monitor is made of sub-systems: a Station (aka client or node) in wich the d
 ## Station (client)
 The station, in a few words, is a express application, it have a RESP API that gives data with the state of the linux machine
 
-## Installation
-
-To install, just clone the repo and install the dependencies with npm
-```
-$ git clone git@github.com:DigitalDev-Toth/health-station.git
-$ cd health-station
-$ npm install
-```
-
 ### Dependencies
 
 The project has been developed in ES6, so, in order to make it work, we use [babel](http://babeljs.io/) as javascript compiler/transpiler, or a version of node who support ES6. (node v4.0+)
@@ -22,7 +13,7 @@ To run and keep working the app even on errors, is used [PM2](https://github.com
 I'ts higly recommender to install both as global:
 
 ```
-$ npm install -g babel pm2
+# npm install -g babel pm2
 ```
 
 In order to work, the station need two libraries to get the data:
@@ -34,19 +25,32 @@ In Ubuntu, can be installed as:
 # apt-get install sysstat
 # apt-get install dcmtk
 ```
-In OSX, can be installed as:
-DCMTK 
-    1.- Install Homebrew
-        1.1 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        1.2 brew install dcmtk
+
+In OSX, DCMTK can be installed with Homebrew  
+```
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# brew install dcmtk
+```
+
+## Installation
+
+To install, just clone the repo and install the dependencies with npm
+```
+# git clone git@github.com:DigitalDev-Toth/health-station.git
+# cd health-station
+# npm install
+```
+
+You also can configure some settings editing the file:
+`/config/app.js`
 
 ## Run it baby!
-### Station
-In order to run the station:
+
+In order to run te station:
 ```
 $ npm run start-prod
 ```
-it calls the following command:
+the script runs the following command:
 
 ```
 $ NODE_ENV=production pm2 start health-station.js -f --interpreter babel-node --name station && pm2 logs station",
@@ -63,7 +67,7 @@ or more directly on the console:
 $ pm2 stop station
 ```
 
-### API Routes 
+# API Routes 
 
 #### GET /v1/
 Array with the information of every route lised bellow

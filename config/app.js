@@ -1,11 +1,16 @@
+const version = 'v1.0.0'
+
 export let development = {
-    port: 8383
+    port: 8383,
+    version
 };
 
 export let production = {
-    port: 8008
+    port: 8008,
+    version
 };
 
 export let test = {
-    port: 3003
+    port: 3003,
+    version
 };
