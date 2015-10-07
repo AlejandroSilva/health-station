@@ -15,7 +15,16 @@ $ cd health-station
 $ npm install
 ```
 
-### Station specific dependencies
+### Dependencies
+
+The project has been developed in ES6, so, in order to make it work, we use [babel](http://babeljs.io/) as javascript compiler/transpiler, or a version of node who support ES6. (node v4.0+)
+To run and keep working the app even on errors, is used [PM2](https://github.com/Unitech/pm2), it's a "production process manager for NodeJs. Perfectly fitted for microservices architecture", as ring to the finger.
+I'ts higly recommender to install both as global:
+
+```
+$ npm install -g babel pm2
+```
+
 In order to work, the station need two libraries to get the data:
 [sysstat, a performance monitor tool for linux](http://sebastien.godard.pagesperso-orange.fr/). This is used to get the CPU, network and memory stats from the system.
 [DCMTK - DICOM Toolkit](http://dicom.offis.de/dcmtk.php.en). This library implements the DICOM protocol, it has the `echoscu` command line tool, it's used in order to get a DICOM ECHO to a DICOM node.
@@ -30,16 +39,6 @@ DCMTK
     1.- Install Homebrew
         1.1 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         1.2 brew install dcmtk
-
-
-## Dependencies
-The project has been developed in ES6, so, in order to make it work, we use [babel](http://babeljs.io/) as javascript compiler/transpiler, or a version of node who support ES6. (node v4.0+)
-To run and keep working the app even on errors, is used [PM2](https://github.com/Unitech/pm2), it's a "production process manager for NodeJs. Perfectly fitted for microservices architecture", as ring to the finger.
-I'ts higly recommender to install both as global:
-
-```
-$ npm install -g babel pm2
-```
 
 ## Run it baby!
 ### Station
