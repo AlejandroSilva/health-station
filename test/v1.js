@@ -60,8 +60,11 @@ describe('API v1', function(){
                 }
 
                 expect(res.body).to.be.an('object');
-                expect(res.body.kbfree).to.be.an('string');
-                expect(res.body.kbfree).to.be.an('string');
+                expect(res.body.kbfree).to.be.an('number');
+                expect(res.body.kbused).to.be.an('number');
+                expect(res.body.free).to.be.an('string');
+                expect(res.body.used).to.be.an('string');
+                expect(res.body.percentUsed).to.be.an('number');
                 done();
             })
     });
