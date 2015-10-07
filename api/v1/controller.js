@@ -9,7 +9,6 @@ let ping = new Ping(libConfig.ping);
 export function nodeInfo(req, res){
     res.json({
         title: process.title,
-        release: process.release.name,
         versions: process.versions
     })
 }
