@@ -1,0 +1,26 @@
+{
+  "name": "health-server",
+  "version": "1.0.0",
+  "description": "nodo heath para el envio de informacion del sistema",
+  "main": "health-station.js",
+  "scripts": {
+    "start-dev": "NODE_ENV=development babel-node health-station.js",
+    "start-prod": "NODE_ENV=production pm2 start health-station.js -f --interpreter babel-node --name station && pm2 logs station",
+    "stop-prod": "pm2 stop station",
+    "test-v1": "NODE_ENV=testing ./node_modules/.bin/mocha --compilers js:babel/register --timeout 5000 test/v1.js "
+  },
+  "author": "toth.cl",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "helmet": "^0.10.0",
+    "morgan": "^1.6.1",
+    "tcp-ping": "^0.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.0",
+    "supertest": "^1.1.0"
+  }
+}
