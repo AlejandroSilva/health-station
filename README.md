@@ -6,8 +6,46 @@ The monitor is made of sub-systems: a Station (aka client or node) in wich the d
 ## Station (client)
 The station, in a few words, is a express application, it have a RESP API that gives data with the state of the linux machine
 
-### Dependencies
+## Installation
 
+### SYSSTAT
+
+In order to work, the station need sysstat in order to get the system data.
+[sysstat, a performance monitor tool for linux](http://sebastien.godard.pagesperso-orange.fr/). This is used to get the CPU, network and memory stats from the system.
+
+In Debian/Ubuntu, can be installed as:
+```
+# apt-get install sysstat
+```
+
+### DCMTK
+
+[DCMTK - DICOM Toolkit](http://dicom.offis.de/dcmtk.php.en). This library implements the DICOM protocol, it has the `echoscu` command line tool, it's used in order to get a DICOM ECHO to a DICOM node.
+
+In Debian/Ubuntu, can be installed as:
+```
+# apt-get install dcmtk
+```
+
+In OSX, DCMTK can be installed with Homebrew:  
+```
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# brew install dcmtk
+```
+
+### Node (with NVM)
+
+In order to run the server node version 4.0+ is recommended, an east installation can be made with [NVM](`https://github.com/creationix/nvm`).
+
+to install nvm, write in the console: 
+```
+# wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh --no-check-certificate | bash
+$ nvm ls-remote
+$ nvm install v4
+$ nvm alias default stable
+```
+
+### Babel
 The project has been developed in ES6, so, in order to make it work, we use [babel](http://babeljs.io/) as javascript compiler/transpiler, or a version of node who support ES6. (node v4.0+)
 To run and keep working the app even on errors, is used [PM2](https://github.com/Unitech/pm2), it's a "production process manager for NodeJs. Perfectly fitted for microservices architecture", as ring to the finger.
 I'ts higly recommender to install both as global:
@@ -16,27 +54,11 @@ I'ts higly recommender to install both as global:
 # npm install -g babel pm2
 ```
 
-In order to work, the station need two libraries to get the data:
-[sysstat, a performance monitor tool for linux](http://sebastien.godard.pagesperso-orange.fr/). This is used to get the CPU, network and memory stats from the system.
-[DCMTK - DICOM Toolkit](http://dicom.offis.de/dcmtk.php.en). This library implements the DICOM protocol, it has the `echoscu` command line tool, it's used in order to get a DICOM ECHO to a DICOM node.
-
-In Ubuntu, can be installed as:
-```
-# apt-get install sysstat
-# apt-get install dcmtk
-```
-
-In OSX, DCMTK can be installed with Homebrew  
-```
-# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# brew install dcmtk
-```
-
-## Installation
+### Clone the repo
 
 To install, just clone the repo and install the dependencies with npm
 ```
-# git clone git@github.com:DigitalDev-Toth/health-station.git
+# git clone https://github.com/DigitalDev-Toth/health-station.git
 # cd health-station
 # npm install
 ```

@@ -1,6 +1,6 @@
 {
   "name": "health-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "nodo heath para el envio de informacion del sistema",
   "main": "health-station.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "express": "^4.13.3",
     "helmet": "^0.10.0",
     "morgan": "^1.6.1",
+    "node-df": "^0.1.1",
     "tcp-ping": "^0.1.1"
   },
   "devDependencies": {

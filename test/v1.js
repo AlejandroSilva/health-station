@@ -83,8 +83,9 @@ describe('API v1', function(){
                 expect(res.body).to.be.an('array');
                 let disc0 = res.body[0];
                 expect(disc0).to.be.an('object');
-                expect(disc0).to.have.property('MBfsfree').that.is.an('number');
-                expect(disc0).to.have.property('FILESYSTEM').that.is.an('string');
+                expect(disc0).to.have.property('free').that.is.an('number');
+                expect(disc0).to.have.property('percent').that.is.an('number');
+                expect(disc0).to.have.property('filesystem').that.is.an('string');
                 done();
             })
     });
