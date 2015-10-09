@@ -1,35 +1,35 @@
-export let development = {
+export const development = {
+    network: {
+        timeMeasured: 8
+    },
     sar:{
         interval: 1,
         count: 3
     },
     ping: {
-        nationalHost: 'www.emol.com',
+        nationalHost: 'www.plp.com',
         internationalHost: 'www.nytimes.com',
-        attempts: 8
+        attempts: 6
     }
-};
+}
 
-export let production = {
-    sar:{
-        interval: 1,
-        count: 3
-    },
+export const production = Object.assign({}, development, {
     ping: {
         nationalHost: 'www.emol.com',
         internationalHost: 'www.nytimes.com',
-        attempts: 8
+        attempts: 10
     }
-};
+})
 
-export let test = {
+export const testing = Object.assign({}, development, {
+    network: {
+        timeMeasured: 2
+    },
     sar: {
         interval: 1,
         count: 1
     },
     ping: {
-        nationalHost: 'www.emol.com',
-        internationalHost: 'www.nytimes.com',
-        attempts: 2
+          attempts: 2
     }
-};
+})

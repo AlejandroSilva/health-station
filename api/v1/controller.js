@@ -1,8 +1,10 @@
 'use strict';
-import Sar from '../../lib/SAR.js'
-import Ping from '../../lib/Ping.js'
-import { discFree } from '../../lib/Disc.js'
+import Sar from '../../modules/SAR.js'
+import Ping from '../../modules/Ping.js'
+import { interfacesInfo } from '../../modules/Network.js'
+import { discFree } from '../../modules/Disc.js'
 import { libConfig } from '../../config/index.js';
+import os from 'os'
 
 let sar  = new Sar(libConfig.sar);
 let ping = new Ping(libConfig.ping);
@@ -19,8 +21,14 @@ const promiseToResponse = (promise, res)=>{
 
 export function nodeInfo(req, res){
     res.json({
+        hostname: os.hostname(),
+        type: os.type(),        // Ex. Linux, Darwin
+        release: os.release(),  // kernel version
+        arch: os.arch(),        // Ex. x64
+        uptime: os.uptime(),    // in seconds
         title: process.title,
-        versions: process.versions
+        nodeVersion: process.versions.node,
+        v8version: process.versions.v8
     })
 }
 
@@ -40,7 +48,7 @@ export function discIOInfo (req, res){
     promiseToResponse(sar.discIO(), res)
 }
 export function netIOInfo (req, res){
-    promiseToResponse(sar.netIO(), res)
+    promiseToResponse(interfacesInfo(), res)
 }
 
 export function pingInfo(req, res){

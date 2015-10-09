@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Necesita echoscu viene en el paquete 'dcmtk_3.6.0', necesita ser instalado antes
  * http://manpages.ubuntu.com/manpages/natty/man1/echoscu.1.html

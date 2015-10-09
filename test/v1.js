@@ -123,7 +123,10 @@ describe('API v1', function(){
                 let interface0 = res.body[0];
                 expect(interface0).to.be.an('object');
                 expect(interface0).to.have.property('interface').that.is.an('string');
-                expect(interface0).to.have.property('rxkBps').that.is.an('number');
+                expect(interface0).to.have.property('RXbitrate').that.is.an('string');
+                expect(interface0).to.have.property('TXbitrate').that.is.an('string');
+                expect(interface0).to.have.property('time').that.is.an('number');
+                expect(interface0).to.have.property('address').that.is.an('string');
                 done();
             })
     });

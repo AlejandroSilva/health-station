@@ -7,11 +7,12 @@
     "start-dev": "NODE_ENV=development babel-node health-station.js",
     "start-prod": "NODE_ENV=production pm2 start health-station.js -f --interpreter babel-node --name station && pm2 logs station",
     "stop-prod": "pm2 stop station",
-    "test-v1": "NODE_ENV=testing ./node_modules/.bin/mocha --compilers js:babel/register --timeout 5000 test/v1.js "
+    "start-test": "NODE_ENV=testing ./node_modules/.bin/mocha --compilers js:babel/register --timeout 5000 test/v1.js "
   },
   "author": "toth.cl",
   "license": "ISC",
   "dependencies": {
+    "bitrate": "^1.0.2",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "helmet": "^0.10.0",

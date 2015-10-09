@@ -3,23 +3,22 @@ import * as app from './app.js';
 import * as lib from './lib.js';
 
 let enviroment = process.env.NODE_ENV || 'development';
-let _appConfig = {}
-let _libConfig = {}
+let appConfig = {}
+let libConfig = {}
 
 if(enviroment==='production') {
-    _appConfig = app.production
-    _libConfig = lib.production
+    appConfig = app.production
+    libConfig = lib.production
 }else if(enviroment==='testing'){
-    _appConfig = app.test
-    _libConfig = lib.test
+    appConfig = app.testing
+    libConfig = lib.testing
 }else{
     // 'development' es el ambiente por defecto
-    _appConfig = app.development
-    _libConfig = lib.development
+    appConfig = app.development
+    libConfig = lib.development
 }
 
-console.log(`Health Station ${_appConfig.version}`);
+console.log(`Health Station ${appConfig.version}`);
 console.log(`Configuración '${enviroment}' cargada.`);
 
-export const appConfig = _appConfig
-export const libConfig = _libConfig
+export { appConfig, libConfig }

@@ -135,40 +135,6 @@ class Sar{
                 });
         });
     }
-    netIO(){
-        let command = `sar -n DEV ${this.interval} ${this.count}`;
-        return new Promise( (resolve, reject)=>{
-            // ejecuta el comando...
-            Sar._exec(command)
-                // si lo ejecuta bien, parsea la respuesta
-                .then( (lines)=>{
-                    // filtrar las linas que no entrega informacion sobre la 'Media'
-                    let interfaceValues = lines.map( (line)=>{
-                        let lineValues = line.trim().split(/\s+/g);
-                        // descartar todas las lineas que no formen parte de la media..
-                        // ... incluyento la linea de cabecera y la interfaz de loopback
-                        if(lineValues[0]==='Media:' && lineValues[1]!=='IFACE' && lineValues[1]!=='lo'){
-                            //Media:          IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil
-                            return {
-                                interface: lineValues[1],
-                                rxkBps: +lineValues[4].replace(',', '.'),
-                                txkBps: +lineValues[5].replace(',', '.'),
-                                interfaceUtilization: +lineValues[9].replace(',', '.')
-                            }
-                        }
-                    }).filter( (line)=>{
-                        // quita del array todas las lineas que fueron descartadas en el .map
-                        return line!=undefined
-                    });
-
-                    resolve(interfaceValues);
-                })
-                // si no, retorna el error
-                .catch(function(err){
-                    reject(err);
-                });
-        });
-    }
 };
 
 export default Sar;
