@@ -6,5 +6,5 @@ import { appConfig } from './config/index.js';
  */
 
 let server = app.listen(appConfig.port, ()=>{
-    console.log(`Servicio iniciado en http://localhost:${appConfig.port}/`);
-});
+    console.log(`Servicio iniciado en http://localhost:${appConfig.port}/`)
+})

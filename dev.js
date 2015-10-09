@@ -28,6 +28,7 @@
 //        console.log("done", err)
 //    }
 //)
+/*
 let resp = `eth0      Link encap:Ethernet  HWaddr 78:2b:cb:0d:51:e4
 inet addr:200.112.228.124  Bcast:200.112.228.127  Mask:255.255.255.248
 inet6 addr: fe80::7a2b:cbff:fe0d:51e4/64 Scope:Link
@@ -110,3 +111,33 @@ console.log(
     //                TXpkts: lineValues[7],
     //                TXbytes: lineValues[9],
     //            }
+*/
+
+import { sync, syncToArray, async } from './lib/spawner.js'
+syncToArray('netstat', ['-ib'], (err, values)=> {
+    if(err) return console.log(err)
+
+    const interfaces =
+        values.filter(lineValues=>{
+            if(lineValues.length===11) {
+                return (
+                    lineValues[0] !== 'Name' &&         // remove header
+                    lineValues[0] !== 'lo0' &&          // remove lo device
+                    lineValues[3].indexOf(':') === -1   // remove ipv6
+                )
+            }else{
+                return false
+            }
+        })
+            .map(lineValues=>{
+                return {
+                    interface: lineValues[0],
+                    address: lineValues[3],
+                    RXpkts: lineValues[4],
+                    RXbytes: lineValues[6],
+                    TXpkts: lineValues[7],
+                    TXbytes: lineValues[9],
+                }
+            })
+    console.log(interfaces)
+})

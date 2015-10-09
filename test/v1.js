@@ -21,10 +21,8 @@ describe('API v1', function(){
                 expect(res.body).to.be.an('object');
                 let node = res.body
                 expect(node).to.have.property('title').that.is.an('string');
-                expect(node).to.have.property('versions').that.is.an('object');
-                let versions = node.versions;
-                expect(versions).to.have.property('node').that.is.an('string');
-                expect(versions).to.have.property('v8').that.is.an('string');
+                expect(node).to.have.property('nodeVersion').that.is.an('string');
+                expect(node).to.have.property('v8version').that.is.an('string');
                 done();
             })
     });
