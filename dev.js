@@ -62,82 +62,49 @@ let values = lines.map(line=>{
     return line.split(' ').filter(value=>{return value!==' '&&value!==''})
 })
 .filter(line=>line.length>0) // quitar lineas en blanco
-
-
-console.log(
-    values.reduce(([interfaces, current], line)=>{
-        if(line[1]==='Link'){
-            // eth0      Link encap:Ethernet  HWaddr 78:2b:cb:0d:51:e4
-            // Name of the interface
-            current.interface = line[0]
-
-        }else if(line[0]==='inet' && line[1].indexOf('addr:')!==-1){
-            //inet addr:200.112.228.124  Bcast:200.112.228.127  Mask:255.255.255.248
-            current.address = line[1]
-
-        }else if(line[0]==='RX' && line[1].indexOf('packets:')!==-1){
-            // RX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
-            current.RXpkts = line[1]
-
-        }else if(line[0]==='TX' && line[1].indexOf('packets:')!==-1){
-            // TX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
-            current.TXpkts = line[1]
-
-        }else if(line[0]==='RX' && line[1].indexOf('bytes:')!==-1){
-            // RX bytes:648494656210 (648.4 GB)  TX bytes:98727039354 (98.7 GB)
-            current.RXbytes = line[1]
-            current.TXbytes = line[5]
-        }
-
-        else if(line[0].indexOf('Interrupt')!==-1){
-            // Interrupt:48 Memory:d4000000-d4012800
-            // las line with information about a interface, the following info corresponds to another interface
-            interfaces.push(current)
-            current = {}
-
-        }else{
-            // other line, ignored
-            //console.log(line)
-        }
-        return [interfaces, current]
-    }, [[],{}])
-)
-
-    //            return {
-    //                interface: lineValues[0],
-    //                address: lineValues[3],
-    //                RXpkts: lineValues[4],
-    //                RXbytes: lineValues[6],
-    //                TXpkts: lineValues[7],
-    //                TXbytes: lineValues[9],
-    //            }
 */
+ import { sync, syncToArray, async } from './lib/spawner.js'
 
-import { sync, syncToArray, async } from './lib/spawner.js'
-syncToArray('netstat', ['-ib'], (err, values)=> {
-    if(err) return console.log(err)
+//return new Promise((resolve, reject)=> {
+    let interfaces = syncToArray('netstat', ['-ie'], (err, values)=> {
+        if(err) return console.log(err)
 
-    const interfaces =
-        values.filter(lineValues=>{
-            if(lineValues.length===11) {
-                return (
-                    lineValues[0] !== 'Name' &&         // remove header
-                    lineValues[0] !== 'lo0' &&          // remove lo device
-                    lineValues[3].indexOf(':') === -1   // remove ipv6
-                )
-            }else{
-                return false
+        values.reduce(([interfaces, current], line)=> {
+            if (line[1] === 'Link') {
+                // eth0      Link encap:Ethernet  HWaddr 78:2b:cb:0d:51:e4
+                // Name of the interface
+                current.interface = line[0]
+
+            } else if (line[0] === 'inet' && line[1].indexOf('addr:') !== -1) {
+                //inet addr:200.112.228.124  Bcast:200.112.228.127  Mask:255.255.255.248
+                current.address = line[1]
+
+            } else if (line[0] === 'RX' && line[1].indexOf('packets:') !== -1) {
+                // RX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
+                current.RXpkts = line[1]
+
+            } else if (line[0] === 'TX' && line[1].indexOf('packets:') !== -1) {
+                // TX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
+                current.TXpkts = line[1]
+
+            } else if (line[0] === 'RX' && line[1].indexOf('bytes:') !== -1) {
+                // RX bytes:648494656210 (648.4 GB)  TX bytes:98727039354 (98.7 GB)
+                current.RXbytes = line[1]
+                current.TXbytes = line[5]
             }
-        })
-            .map(lineValues=>{
-                return {
-                    interface: lineValues[0],
-                    address: lineValues[3],
-                    RXpkts: lineValues[4],
-                    RXbytes: lineValues[6],
-                    TXpkts: lineValues[7],
-                    TXbytes: lineValues[9],
-                }
-            })
+
+            else if (line[0].indexOf('Interrupt') !== -1) {
+                // Interrupt:48 Memory:d4000000-d4012800
+                // las line with information about a interface, the following info corresponds to another interface
+                interfaces.push(current)
+                current = {}
+
+            } else {
+                // other line, ignored
+                //console.log(line)
+            }
+            return [interfaces, current]
+        }, [[], {}])
+    })
     console.log(interfaces)
-})
+//})
