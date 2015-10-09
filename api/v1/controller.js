@@ -63,7 +63,7 @@ export function allInfo(req, res, next){
     let ram = sar.ram()
     let discMounted = discFree()
     let discIO = sar.discIO()
-    let netIO = sar.netIO()
+    let netIO = interfacesInfo()
     let pingNac = ping.testNational()
     let pingInt = ping.testIntrernational()
     // llama a todos los procesos de forma asincronica, y espera a que esten todos listos
