@@ -66,7 +66,7 @@ let values = lines.map(line=>{
  import { sync, syncToArray, async } from './lib/spawner.js'
 
 //return new Promise((resolve, reject)=> {
-    let interfaces = syncToArray('netstat', ['-ie'], (err, values)=> {
+    syncToArray('netstat', ['-ie'], (err, values)=> {
         if(err) return console.log(err)
 
         values.reduce(([interfaces, current], line)=> {
