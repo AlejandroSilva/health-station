@@ -54,16 +54,16 @@ export const Linux_getInterfacesInfo = ()=> {
 
                 } else if (line[0] === 'RX' && line[1].indexOf('packets:') !== -1) {
                     // RX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
-                    current.RXpkts = line[1].replace('packets:','')
+                    current.RXpkts = parseInt(line[1].replace('packets:',''))
 
                 } else if (line[0] === 'TX' && line[1].indexOf('packets:') !== -1) {
                     // TX packets:542044151 errors:0 dropped:0 overruns:0 frame:0
-                    current.TXpkts = line[1].replace('packets:','')
+                    current.TXpkts = parseInt(line[1].replace('packets:',''))
 
                 } else if (line[0] === 'RX' && line[1].indexOf('bytes:') !== -1) {
                     // RX bytes:648494656210 (648.4 GB)  TX bytes:98727039354 (98.7 GB)
-                    current.RXbytes = line[1].replace('bytes:','')
-                    current.TXbytes = line[5].replace('bytes:','')
+                    current.RXbytes = parseInt(line[1].replace('bytes:',''))
+                    current.TXbytes = parseInt(line[5].replace('bytes:',''))
                 }
 
                 else if (line[0].indexOf('Interrupt') !== -1) {
