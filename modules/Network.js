@@ -37,7 +37,7 @@ const OSX_getInterfacesInfo = ()=>{
         })
     })
 }
-let Linux_getInterfacesInfo = ()=> {
+export const Linux_getInterfacesInfo = ()=> {
     return new Promise((resolve, reject)=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
             if (err) reject(err)
@@ -82,8 +82,6 @@ let Linux_getInterfacesInfo = ()=> {
         })
     })
 }
-
-
 
 export const interfacesInfo = ()=>{
     return new Promise((resolve, reject)=>{
