@@ -6,7 +6,7 @@ import { bitrateForHumans } from '../lib/converter.js'
 import { libConfig } from '../config/index.js'
 
 // network IO, show the interfaces throughput
-const OSX_getInterfacesInfo = ()=>{
+export const OSX_getInterfacesInfo = ()=>{
     return new Promise((resolve, reject)=>{
         syncToArray('netstat', ['-ib'], (err, values)=> {
             if(err) return reject(err)
@@ -42,7 +42,7 @@ export const Linux_getInterfacesInfo = ()=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
             if (err) reject(err)
 
-            const interfaces = values.reduce(([interfaces, current], line)=> {
+            const parsedInterfaces = values.reduce(([interfaces, current], line)=> {
                 if (line[1] === 'Link') {
                     // eth0      Link encap:Ethernet  HWaddr 78:2b:cb:0d:51:e4
                     // Name of the interface
@@ -67,7 +67,7 @@ export const Linux_getInterfacesInfo = ()=> {
                 }
 
                 else if (line[0].indexOf('Interrupt') !== -1) {
-                    // Interrupt:48 Memory:d4000000-d4012800
+                    // Interrupt:48 Memory000:d4000000-d4012800
                     // las line with information about a interface, the following info corresponds to another interface
                     interfaces.push(current)
                     current = {}
@@ -78,6 +78,7 @@ export const Linux_getInterfacesInfo = ()=> {
                 }
                 return [interfaces, current]
             }, [[], {}])
+            let [interfaces, lastInterface] = parsedInterfaces
             resolve(interfaces)
         })
     })
