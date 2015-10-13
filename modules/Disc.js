@@ -24,12 +24,12 @@ const discFree = ()=>{
                             return {
                                 filesystem: mount.filesystem,
                                 mount: mount.mount,
-                                kbfree: free,
-                                kbused: mount.used,
-                                kbtotal: mount.size,
-                                free: sizeParser(free),
-                                used: sizeParser(mount.used),
-                                total: sizeParser(mount.size),
+                                blocksFree: free,
+                                blocksUsed: mount.used,
+                                blocksTotal: mount.size,
+                                free: sizeParser(free*1024),
+                                used: sizeParser(mount.used*1024),
+                                total: sizeParser(mount.size*1024),
                                 percentUsed: Math.round(mount.used*100/mount.size)
                             }
                         })
