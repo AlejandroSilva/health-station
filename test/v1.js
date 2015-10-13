@@ -53,9 +53,9 @@ describe('API v1', function(){
             })
     });
 
-    it('GET /v1/ram', function (done) {
+    it('GET /v1/mem', function (done) {
         request(app)
-            .get('/v1/ram')
+            .get('/v1/mem')
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function(err, res){
@@ -74,9 +74,9 @@ describe('API v1', function(){
             })
     });
 
-    it('GET /v1/disc', function (done) {
+    it('GET /v1/discs', function (done) {
         request(app)
-            .get('/v1/disc')
+            .get('/v1/discs')
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function(err, res) {
@@ -95,23 +95,23 @@ describe('API v1', function(){
             })
     });
 
-    it('GET /v1/discIO', function (done) {
-        request(app)
-            .get('/v1/discIO')
-            .expect('Content-Type', /json/)
-            .expect(200)
-            .end(function(err, res){
-                if(err){
-                    done(err);
-                    return;
-                }
-
-                expect(res.body).to.be.an('object');
-                expect(res.body).to.have.property('totalRequestPerSecond').that.is.an('number');
-                expect(res.body).to.have.property('blockWritesPerSecond').that.is.an('number');
-                done();
-            })
-    });
+    //it('GET /v1/discsIO', function (done) {
+    //    request(app)
+    //        .get('/v1/discsIO')
+    //        .expect('Content-Type', /json/)
+    //        .expect(200)
+    //        .end(function(err, res){
+    //            if(err){
+    //                done(err);
+    //                return;
+    //            }
+    //
+    //            expect(res.body).to.be.an('object');
+    //            expect(res.body).to.have.property('totalRequestPerSecond').that.is.an('number');
+    //            expect(res.body).to.have.property('blockWritesPerSecond').that.is.an('number');
+    //            done();
+    //        })
+    //});
 
     it('GET /v1/netIO', function (done) {
         request(app)

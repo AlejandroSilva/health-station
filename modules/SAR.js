@@ -1,3 +1,4 @@
+/*
 import process from 'child_process';
 
 class Sar{
@@ -106,35 +107,36 @@ class Sar{
     //            });
     //    });
     //}
-    discIO(){
-        let command = `sar -b ${this.interval} ${this.count}`;
-        return new Promise( (resolve, reject)=>{
-            // ejecuta el comando...
-            Sar._exec(command)
-                // si lo ejecuta bien, parsea la respuesta
-                .then( (lines)=>{
-                    // al ultima linea, 'Media', corresponde a los valores promedio de la prueba
-                    let media = lines[lines.length-1];
-                    let mediaValues = media.trim().split(/\s+/g);
-
-                    // 13:48:53          tps      rtps      wtps   bread/s   bwrtn/s
-                    resolve({
-                        totalRequestPerSecond: +mediaValues[1].replace(',', '.'),
-                        readRequestPerSecond: +mediaValues[2].replace(',', '.'),
-                        writeRequestPerSecond: +mediaValues[3].replace(',', '.'),
-                        blockReadsPerSecond: +mediaValues[4].replace(',', '.'),
-                        // Total amount of data read from the devices in blocks per second.
-                        // Blocks are equivalent to sectors with 2.4 kernels and newer and therefore have a size of 512 bytes.
-                        // With older kernels, a block is of indeterminate size.
-                        blockWritesPerSecond: +mediaValues[5].replace(',', '.')
-                    });
-                })
-                // si no, retorna el error
-                .catch(function(err){
-                    reject(err);
-                });
-        });
-    }
+    //discIO(){
+    //    let command = `sar -b ${this.interval} ${this.count}`;
+    //    return new Promise( (resolve, reject)=>{
+    //        // ejecuta el comando...
+    //        Sar._exec(command)
+    //            // si lo ejecuta bien, parsea la respuesta
+    //            .then( (lines)=>{
+    //                // al ultima linea, 'Media', corresponde a los valores promedio de la prueba
+    //                let media = lines[lines.length-1];
+    //                let mediaValues = media.trim().split(/\s+/g);
+    //
+    //                // 13:48:53          tps      rtps      wtps   bread/s   bwrtn/s
+    //                resolve({
+    //                    totalRequestPerSecond: +mediaValues[1].replace(',', '.'),
+    //                    readRequestPerSecond: +mediaValues[2].replace(',', '.'),
+    //                    writeRequestPerSecond: +mediaValues[3].replace(',', '.'),
+    //                    blockReadsPerSecond: +mediaValues[4].replace(',', '.'),
+    //                    // Total amount of data read from the devices in blocks per second.
+    //                    // Blocks are equivalent to sectors with 2.4 kernels and newer and therefore have a size of 512 bytes.
+    //                    // With older kernels, a block is of indeterminate size.
+    //                    blockWritesPerSecond: +mediaValues[5].replace(',', '.')
+    //                });
+    //            })
+    //            // si no, retorna el error
+    //            .catch(function(err){
+    //                reject(err);
+    //            });
+    //    });
+    //}
 };
 
 export default Sar;
+*/

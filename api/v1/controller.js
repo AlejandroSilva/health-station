@@ -1,14 +1,15 @@
-'use strict';
-import Sar from '../../modules/SAR.js'
+import os from 'os'
+import { libConfig } from '../../config/index.js'
+
+// Modules
+//import Sar from '../../modules/SAR.js'
 import Ping from '../../modules/Ping.js'
 import { interfacesInfo } from '../../modules/Network.js'
 import { discFree } from '../../modules/Disc.js'
-import { libConfig } from '../../config/index.js';
-import os from 'os'
 import { memData } from '../../modules/Mem.js'
 import { cpuData } from '../../modules/Cpu.js'
 
-let sar  = new Sar(libConfig.sar);
+//let sar  = new Sar(libConfig.sar);
 let ping = new Ping(libConfig.ping);
 
 const promiseToResponse = (promise, res)=>{
@@ -38,16 +39,19 @@ export function cpuInfo (req, res){
     promiseToResponse( cpuData(), res)
 }
 
-export function ramInfo (req, res){
+export function memInfo (req, res){
     res.json(memData())
 }
 
-export function spaceInfo (req, res){
+export function discInfo (req, res){
     promiseToResponse(discFree(), res)
 }
 
-export function discIOInfo (req, res){
-    promiseToResponse(sar.discIO(), res)
+export function discsIOInfo (req, res){
+    //promiseToResponse(sar.discIO(), res)
+    res.status(501).json({
+        error: 'not implemented'
+    })
 }
 export function netIOInfo (req, res){
     promiseToResponse(interfacesInfo(), res)
@@ -62,20 +66,20 @@ export function pingCustom(req, res){
 
 export function allInfo(req, res, next){
     let cpu = cpuData()
-    let ram = memData()
+    let mem = memData()
     let discMounted = discFree()
-    let discIO = sar.discIO()
+    //let discIO = sar.discIO()
     let netIO = interfacesInfo()
     let pingNac = ping.testNational()
     let pingInt = ping.testIntrernational()
     // llama a todos los procesos de forma asincronica, y espera a que esten todos listos
-    Promise.all([cpu, ram, discMounted, discIO, netIO, pingNac, pingInt])
+    Promise.all([cpu, mem, discMounted, discIO, netIO, pingNac, pingInt])
         .then((data)=>{
             res.json({
                 cpu: data[0],
-                ram: data[1],
+                mem: data[1],
                 discMounted: data[2],
-                discIO: data[3],
+                //discIO: data[3],
                 netIO: data[4],
                 pingNational: data[5],
                 pingInternational: data[6]
