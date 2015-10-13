@@ -87,17 +87,16 @@ export const Linux_getInterfacesInfo = ()=> {
 export const interfacesInfo = ()=>{
     return new Promise((resolve, reject)=>{
         let _getInterfacesInfo = null
-        switch(os.type()) {
-            case 'Darwin':
-                _getInterfacesInfo = OSX_getInterfacesInfo
-                break
-            case 'Linux':
-                _getInterfacesInfo = Linux_getInterfacesInfo
-            default:
-                return reject('unsupported OS')
+        const OS = os.type()
+        if(OS==='Darwin') {
+            _getInterfacesInfo = OSX_getInterfacesInfo
+        }else if(OS==='Linux') {
+            _getInterfacesInfo = Linux_getInterfacesInfo
+        }else{
+            return reject('unsupported OS')
         }
-        let promiseStart = _getInterfacesInfo()
 
+        let promiseStart = _getInterfacesInfo()
         setTimeout(()=> {
             // esperar unos segundos antes de volver a tomar datos para comparar
             let promiseEnd = _getInterfacesInfo()
