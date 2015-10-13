@@ -30,6 +30,8 @@ export const testing = Object.assign({}, development, {
         count: 1
     },
     ping: {
-          attempts: 2
+        nationalHost: 'www.emol.com',
+        internationalHost: 'www.nytimes.com',
+        attempts: 2,
     }
 })
