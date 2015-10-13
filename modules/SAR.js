@@ -77,35 +77,35 @@ class Sar{
                 });
         });
     }
-    ram(){
-        let command = `sar -r ${this.interval} ${this.count}`;
-        return new Promise( (resolve, reject)=>{
-            // ejecuta el comando...
-            Sar._exec(command)
-                // si lo ejecuta bien, parsea la respuesta
-                .then( (lines)=>{
-                    // al ultima linea, 'Media', corresponde a los valores promedio de la prueba
-                    let media = lines[lines.length-1];
-                    let mediaValues = media.trim().split(/\s+/g);
-
-                    //12:52:40    kbmemfree kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
-                    resolve({
-                        // +'123', convierte el string '123', en el numero 123
-                        kbfree: +mediaValues[1],
-                        kbused: +mediaValues[2],    // no toma en cuenta la del kernel
-                        kbbuffers: +mediaValues[4], // usada por el kernel para buffer
-                        kbcached: +mediaValues[5],  //  usada por el kernel para cache
-                        free: this._KBForHumans(+mediaValues[1]),
-                        used: this._KBForHumans(+mediaValues[2]),
-                        percentUsed: +mediaValues[3].replace(',', '.')
-                    });
-                })
-                // si no, retorna el error
-                .catch(function(err){
-                    reject(err);
-                });
-        });
-    }
+    //ram(){
+    //    let command = `sar -r ${this.interval} ${this.count}`;
+    //    return new Promise( (resolve, reject)=>{
+    //        // ejecuta el comando...
+    //        Sar._exec(command)
+    //            // si lo ejecuta bien, parsea la respuesta
+    //            .then( (lines)=>{
+    //                // al ultima linea, 'Media', corresponde a los valores promedio de la prueba
+    //                let media = lines[lines.length-1];
+    //                let mediaValues = media.trim().split(/\s+/g);
+    //
+    //                //12:52:40    kbmemfree kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+    //                resolve({
+    //                    // +'123', convierte el string '123', en el numero 123
+    //                    kbfree: +mediaValues[1],
+    //                    kbused: +mediaValues[2],    // no toma en cuenta la del kernel
+    //                    kbbuffers: +mediaValues[4], // usada por el kernel para buffer
+    //                    kbcached: +mediaValues[5],  //  usada por el kernel para cache
+    //                    free: this._KBForHumans(+mediaValues[1]),
+    //                    used: this._KBForHumans(+mediaValues[2]),
+    //                    percentUsed: +mediaValues[3].replace(',', '.')
+    //                });
+    //            })
+    //            // si no, retorna el error
+    //            .catch(function(err){
+    //                reject(err);
+    //            });
+    //    });
+    //}
     discIO(){
         let command = `sar -b ${this.interval} ${this.count}`;
         return new Promise( (resolve, reject)=>{

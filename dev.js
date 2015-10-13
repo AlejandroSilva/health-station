@@ -77,6 +77,24 @@ import {
 //.then((r1, r2)=>console.log(r1,r2 ))
 //.catch(e=>console.log(e))
 
-interfacesInfo()
-    .then(res=>console.log("r:", res))
-    .catch(err=>console.log("e", err))
+//interfacesInfo()
+//    .then(res=>console.log("r:", res))
+//    .catch(err=>console.log("e", err))
+
+import os from 'os'
+import sizeParser from 'filesize'
+const freemem = os.freemem()
+const totalmem = os.totalmem()
+const usedmem = totalmem-freemem
+const mem = {
+    kbfree: freemem,
+    kbtotal: totalmem,
+    kbused: usedmem,
+    //kbbuffers: 1802636,
+    //kbcached: 12012459,
+    free: sizeParser(freemem),
+    used: sizeParser(usedmem),
+    total: sizeParser(totalmem),
+    percentUsed: Math.round((usedmem/totalmem))
+}
+console.log(mem)

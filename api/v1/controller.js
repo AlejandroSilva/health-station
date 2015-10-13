@@ -5,6 +5,7 @@ import { interfacesInfo } from '../../modules/Network.js'
 import { discFree } from '../../modules/Disc.js'
 import { libConfig } from '../../config/index.js';
 import os from 'os'
+import { memInfo } from '../../modules/Mem.js'
 
 let sar  = new Sar(libConfig.sar);
 let ping = new Ping(libConfig.ping);
@@ -37,7 +38,7 @@ export function cpuInfo (req, res){
 }
 
 export function ramInfo (req, res){
-    promiseToResponse(sar.ram(), res)
+    res.json(memInfo())
 }
 
 export function spaceInfo (req, res){
@@ -60,7 +61,7 @@ export function pingCustom(req, res){
 
 export function allInfo(req, res, next){
     let cpu = sar.cpu()
-    let ram = sar.ram()
+    let ram = memInfo()
     let discMounted = discFree()
     let discIO = sar.discIO()
     let netIO = interfacesInfo()
