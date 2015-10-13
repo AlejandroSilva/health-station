@@ -40,7 +40,7 @@ export const OSX_getInterfacesInfo = ()=>{
 export const Linux_getInterfacesInfo = ()=> {
     return new Promise((resolve, reject)=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
-            if (err) reject(err)
+            if(err) return reject(err)
 
             const parsedInterfaces = values.reduce(([interfaces, current], line)=> {
                 if (line[1] === 'Link') {
@@ -94,14 +94,14 @@ export const interfacesInfo = ()=>{
             case 'Linux':
                 _getInterfacesInfo = Linux_getInterfacesInfo
             default:
-                return Promise.reject('unsupported OS')
+                return reject('unsupported OS')
         }
-        let interfacesStart = _getInterfacesInfo()
+        let promiseStart = _getInterfacesInfo()
 
         setTimeout(()=> {
             // esperar unos segundos antes de volver a tomar datos para comparar
-            let interfacesEnd = _getInterfacesInfo()
-            Promise.all([interfacesStart, interfacesEnd])
+            let promiseEnd = _getInterfacesInfo()
+            Promise.all([promiseStart, promiseEnd])
                 .then(([start, end])=>{
                     // calcular la diferencia de datos en el tiempo
                     resolve(

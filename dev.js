@@ -64,9 +64,19 @@ let values = lines.map(line=>{
 .filter(line=>line.length>0) // quitar lineas en blanco
 */
 import { sync, syncToArray, async } from './lib/spawner.js'
-import { Linux_getInterfacesInfo, OSX_getInterfacesInfo } from './modules/Network.js'
+import {
+    Linux_getInterfacesInfo,
+    OSX_getInterfacesInfo,
+    interfacesInfo
+} from './modules/Network.js'
 
-Linux_getInterfacesInfo()
-//OSX_getInterfacesInfo()
-.then(d=>console.log(d))
-.catch(e=>console.log(e))
+//Linux_getInterfacesInfo()
+//let p1 = OSX_getInterfacesInfo()
+//let p2 = OSX_getInterfacesInfo()
+//Promise.all([p1,p2])
+//.then((r1, r2)=>console.log(r1,r2 ))
+//.catch(e=>console.log(e))
+
+interfacesInfo()
+    .then(res=>console.log("r:", res))
+    .catch(err=>console.log("e", err))
