@@ -73,16 +73,16 @@ export function allInfo(req, res, next){
     let pingNac = ping.testNational()
     let pingInt = ping.testIntrernational()
     // llama a todos los procesos de forma asincronica, y espera a que esten todos listos
-    Promise.all([cpu, mem, discMounted, discIO, netIO, pingNac, pingInt])
+    Promise.all([cpu, mem, discMounted, /*discIO,*/ netIO, pingNac, pingInt])
         .then((data)=>{
             res.json({
                 cpu: data[0],
                 mem: data[1],
                 discMounted: data[2],
                 //discIO: data[3],
-                netIO: data[4],
-                pingNational: data[5],
-                pingInternational: data[6]
+                netIO: data[3],
+                pingNational: data[4],
+                pingInternational: data[5]
             });
         })
         .catch(next);
