@@ -30,7 +30,7 @@ const discFree = ()=>{
                                 free: sizeParser(free),
                                 used: sizeParser(mount.used),
                                 total: sizeParser(mount.size),
-                                percent: mount.capacity*100
+                                percentUsed: Math.round(mount.used*100/mount.size)
                             }
                         })
                 )
