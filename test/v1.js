@@ -93,10 +93,10 @@ describe('API v1', function(){
                 expect(disc0).to.have.property('free').that.is.an('string');
                 expect(disc0).to.have.property('used').that.is.an('string');
                 expect(disc0).to.have.property('total').that.is.an('string');
-                expect(disc0).to.have.property('kbfree').that.is.an('number');
-                expect(disc0).to.have.property('kbused').that.is.an('number');
-                expect(disc0).to.have.property('kbtotal').that.is.an('number');
-                expect(disc0).to.have.property('percent').that.is.an('number');
+                expect(disc0).to.have.property('blocksFree').that.is.an('number');
+                expect(disc0).to.have.property('blocksUsed').that.is.an('number');
+                expect(disc0).to.have.property('blocksTotal').that.is.an('number');
+                expect(disc0).to.have.property('percentUsed').that.is.an('number');
 
                 done();
             })
