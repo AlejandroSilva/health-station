@@ -41,42 +41,42 @@ class Sar{
                 })
         });
     }
-    cpu(){
-        let command = `sar -P ALL ${this.interval} ${this.count}`;
-        return new Promise( (resolve, reject)=>{
-            // ejecuta el comando...
-            Sar._exec(command)
-                // si lo ejecuta bien, parsea la respuesta
-                .then( (lines)=>{
-                    // filtrar las linas que no entrega informacion sobre la 'Media'
-                    let interfaceValues = lines.map( (line)=>{
-                        let lineValues = line.trim().split(/\s+/g);
-                        // descartar todas las lineas que no formen parte de la media.. incluyento la linea de cabecera
-                        if(lineValues[0]==='Media:' && lineValues[1]!=='CPU'){
-                            //Media:          CPU     %user     %nice   %system   %iowait    %steal     %idle
-                            return {
-                                CPU: lineValues[1],
-                                userPercent: +lineValues[2].replace(',', '.'),
-                                nicePercent: +lineValues[3].replace(',', '.'),
-                                systemPercent: +lineValues[4].replace(',', '.'),
-                                iowaitPercent: +lineValues[5].replace(',', '.'),
-                                stealPercent: +lineValues[6].replace(',', '.'),
-                                idlePercent: +lineValues[7].replace(',', '.')
-                            }
-                        }
-                    }).filter( (line)=>{
-                        // quita del array todas las lineas que fueron descartadas en el .map
-                        return line!=undefined
-                    });
-
-                    resolve(interfaceValues);
-                })
-                // si no, retorna el error
-                .catch(function(err){
-                    reject(err);
-                });
-        });
-    }
+    //cpu(){
+    //    let command = `sar -P ALL ${this.interval} ${this.count}`;
+    //    return new Promise( (resolve, reject)=>{
+    //        // ejecuta el comando...
+    //        Sar._exec(command)
+    //            // si lo ejecuta bien, parsea la respuesta
+    //            .then( (lines)=>{
+    //                // filtrar las linas que no entrega informacion sobre la 'Media'
+    //                let interfaceValues = lines.map( (line)=>{
+    //                    let lineValues = line.trim().split(/\s+/g);
+    //                    // descartar todas las lineas que no formen parte de la media.. incluyento la linea de cabecera
+    //                    if(lineValues[0]==='Media:' && lineValues[1]!=='CPU'){
+    //                        //Media:          CPU     %user     %nice   %system   %iowait    %steal     %idle
+    //                        return {
+    //                            CPU: lineValues[1],
+    //                            userPercent: +lineValues[2].replace(',', '.'),
+    //                            nicePercent: +lineValues[3].replace(',', '.'),
+    //                            systemPercent: +lineValues[4].replace(',', '.'),
+    //                            iowaitPercent: +lineValues[5].replace(',', '.'),
+    //                            stealPercent: +lineValues[6].replace(',', '.'),
+    //                            idlePercent: +lineValues[7].replace(',', '.')
+    //                        }
+    //                    }
+    //                }).filter( (line)=>{
+    //                    // quita del array todas las lineas que fueron descartadas en el .map
+    //                    return line!=undefined
+    //                });
+    //
+    //                resolve(interfaceValues);
+    //            })
+    //            // si no, retorna el error
+    //            .catch(function(err){
+    //                reject(err);
+    //            });
+    //    });
+    //}
     //ram(){
     //    let command = `sar -r ${this.interval} ${this.count}`;
     //    return new Promise( (resolve, reject)=>{

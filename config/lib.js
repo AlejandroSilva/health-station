@@ -10,6 +10,9 @@ export const development = {
         nationalHost: 'www.plp.com',
         internationalHost: 'www.nytimes.com',
         attempts: 6
+    },
+    cpu: {
+        timeMeasured: 10
     }
 }
 
@@ -33,5 +36,8 @@ export const testing = Object.assign({}, development, {
         nationalHost: 'www.emol.com',
         internationalHost: 'www.nytimes.com',
         attempts: 2,
+    },
+    cpu: {
+        timeMeasured: 2
     }
 })

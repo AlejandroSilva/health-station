@@ -38,10 +38,17 @@ describe('API v1', function(){
                     return;
                 }
 
-                expect(res.body).to.be.an('array');
-                let cpuAll = res.body[0];
-                expect(cpuAll).to.have.property('CPU').that.is.an('string');
-                expect(cpuAll).to.have.property('idlePercent').that.is.an('number');
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('model').that.is.an('string');
+                expect(res.body).to.have.property('times').that.is.an('object');
+                const times = res.body.times
+                expect(times).to.have.property('user').that.is.an('number');
+                expect(times).to.have.property('sys').that.is.an('number');
+                expect(times).to.have.property('idle').that.is.an('number');
+
+                expect(res.body).to.have.property('percentUser').that.is.an('number');
+                expect(res.body).to.have.property('percentSys').that.is.an('number');
+                expect(res.body).to.have.property('percentIdle').that.is.an('number');
                 done();
             })
     });

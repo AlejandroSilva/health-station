@@ -77,10 +77,7 @@ import {
 //.then((r1, r2)=>console.log(r1,r2 ))
 //.catch(e=>console.log(e))
 
-//interfacesInfo()
-//    .then(res=>console.log("r:", res))
-//    .catch(err=>console.log("e", err))
-
+/*
 import os from 'os'
 import sizeParser from 'filesize'
 const freemem = os.freemem()
@@ -98,3 +95,9 @@ const mem = {
     percentUsed: Math.round((usedmem/totalmem))
 }
 console.log(mem)
+*/
+
+import { cpusInfo } from './modules/Cpu.js'
+cpusInfo()
+    .then(res=>console.log("r:", res))
+    .catch(err=>console.log("e", err))

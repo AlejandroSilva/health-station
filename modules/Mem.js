@@ -5,7 +5,7 @@ const freemem = os.freemem()
 const totalmem = os.totalmem()
 const usedmem = totalmem-freemem
 
-export const memInfo = ()=>{
+export const memData = ()=>{
     return {
         kbfree: freemem,
         kbtotal: totalmem,
