@@ -1,4 +1,5 @@
 import df from 'node-df'
+import sizeParser from 'filesize'
 
 const discFree = ()=>{
     return new Promise((resolve, reject)=>{
@@ -17,18 +18,24 @@ const discFree = ()=>{
                 //    mount: '/net' }
                 resolve(
                     data
-                        .filter((mount)=>mount.size!==0)
+                        .filter((mount)=>mount.size!==0 && mount.filesystem!=='none')
                         .map((mount)=>{
-                            mount.free = mount.size - mount.used
-                            //mount.percent = Math.round((mount.used/mount.size)*100)
-                            mount.percent = mount.capacity*100
-                            return mount
+                            const free = mount.size - mount.used
+                            return {
+                                filesystem: mount.filesystem,
+                                mount: mount.mount,
+                                kbfree: free,
+                                kbused: mount.used,
+                                kbtotal: mount.size,
+                                free: sizeParser(free),
+                                used: sizeParser(mount.used),
+                                total: sizeParser(mount.size),
+                                percent: mount.capacity*100
+                            }
                         })
                 )
             }
         })
     })
 }
-
-
 export { discFree }
