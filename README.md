@@ -8,16 +8,6 @@ The station, in a few words, is a express application, it have a RESP API that g
 
 ## Installation
 
-### SYSSTAT
-
-In order to work, the station need sysstat in order to get the system data.
-[sysstat, a performance monitor tool for linux](http://sebastien.godard.pagesperso-orange.fr/). This is used to get the CPU, network and memory stats from the system.
-
-In Debian/Ubuntu, can be installed as:
-```
-# apt-get install sysstat
-```
-
 ### DCMTK
 
 [DCMTK - DICOM Toolkit](http://dicom.offis.de/dcmtk.php.en). This library implements the DICOM protocol, it has the `echoscu` command line tool, it's used in order to get a DICOM ECHO to a DICOM node.
@@ -65,6 +55,20 @@ To install, just clone the repo and install the dependencies with npm
 
 You also can configure some settings editing the file:
 `/config/app.js`
+
+## Test the API
+
+To test if the APi get the data correctly, run the test::
+```
+$ npm run start-test
+```
+
+It must return something like this:
+```
+  7 passing (7s)
+```
+
+If a problem occurs, feel free to open a issue or make a pull request to improve the code 
 
 ## Run it baby!
 
