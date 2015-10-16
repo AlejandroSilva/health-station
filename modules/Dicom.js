@@ -7,7 +7,7 @@ import process from 'child_process'; // system api
 
 export default class Dicom{
     static version(host, ip, aec){
-        return new Promise( function(resolve, reject) {
+        return new Promise( (resolve, reject)=>{
             process.exec(`echoscu --version`,
                 function (err, stdout, stderr) {
                     if (err) {
@@ -20,15 +20,15 @@ export default class Dicom{
         })
     }
     static echo(host, ip, aec){
-        return new Promise( function(resolve, reject){
+        return new Promise((resolve, reject)=>{
             process.exec(
                 `echoscu ${host} ${ip} -aec ${aec} -v`,
                 function (err, stdout, stderr) {
                     // la informacion del echo correcto o incorrecto siempre esta en stderr
-                    let messages = stderr.split('\n');
+                    const messages = stderr.split('\n');
                     messages.splice(messages.length-1, 1); // quitar el ultimo (es en blanco)
 
-                    let response = {
+                    const response = {
                         association: 'Unknown',
                         dicomEcho: 'Unknown',
                         log: messages

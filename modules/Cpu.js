@@ -28,9 +28,9 @@ export const cpuData = ()=>{
             resolve({
                 ...reducedData,
                 secMeasured: libConfig.cpu.timeMeasured,
-                percentUser: Math.round(reducedData.times.user*10/msMeasured),
-                percentSys:  Math.round(reducedData.times.sys*10/msMeasured),
-                percentIdle: Math.round(reducedData.times.idle*10/msMeasured)
+                percentUser: Math.round(reducedData.times.user*10/(msMeasured*cpusData.length)),
+                percentSys:  Math.round(reducedData.times.sys*10/(msMeasured*cpusData.length)),
+                percentIdle: Math.round(reducedData.times.idle*10/(msMeasured*cpusData.length))
             })
         }, msMeasured)
     })
