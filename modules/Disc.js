@@ -18,7 +18,11 @@ const discFree = ()=>{
                 //    mount: '/net' }
                 resolve(
                     data
-                        .filter((mount)=>mount.size!==0 && mount.filesystem!=='none')
+                        .filter((mount)=>{
+                            return mount.size!==0 &&
+                                mount.filesystem!=='none' &&
+                                mount.mount!=='/boot'           // no nos interesa la unidad de booteo
+                        })
                         .map((mount)=>{
                             const free = mount.size - mount.used
                             return {
