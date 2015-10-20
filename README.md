@@ -370,4 +370,4 @@ Make a ping to a custom host. Example `GET /v1/ping/9gag.com`
 ```
 
 #### GET /v1/dicom
-(... PENDING ...)  
+(... PENDING ...)
