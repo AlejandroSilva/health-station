@@ -15,9 +15,10 @@ export const OSX_getInterfacesInfo = ()=>{
                 values.filter(lineValues=>{
                     if(lineValues.length===11) {
                         return (
-                            lineValues[0] !== 'Name' &&         // remove header
-                            lineValues[0] !== 'lo0' &&          // remove lo device
-                            lineValues[3].indexOf(':') === -1   // remove ipv6
+                            lineValues[0] !== 'Name' &&          // remove header line
+                            lineValues[0] !== 'lo0' &&           // remove lo device
+                            lineValues[0].indexOf(':') === -1 && // remove virtual interface
+                            lineValues[3].indexOf(':') === -1    // remove ipv6
                         )
                     }else{
                         return false
