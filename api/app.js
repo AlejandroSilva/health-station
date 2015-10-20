@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
+import { appConfig } from '../config'
 let app = express()
 
 /**
@@ -18,7 +19,7 @@ app.use(morgan('combined'));
  * Routes
  */
 app.get('/', (req, res)=>{
-    res.send('hello, this is a health station')
+    res.send(`hello, this is a Toth Health Station ${appConfig.version}.`)
 })
 
 import v1 from './v1'
