@@ -6,6 +6,7 @@
   "scripts": {
     "start-dev": "NODE_ENV=development babel-node health-station.js",
     "start-prod": "NODE_ENV=production pm2 start health-station.js -f --interpreter babel-node --name station && pm2 logs station",
+    "start-prod-no-log": "NODE_ENV=production pm2 start health-station.js -f --interpreter babel-node --name station",
     "stop-prod": "pm2 stop station",
     "start-test": "NODE_ENV=testing ./node_modules/.bin/mocha --compilers js:babel/register --timeout 5000 test/v1.js "
   },
