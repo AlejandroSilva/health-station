@@ -49,12 +49,6 @@ export const Linux_getInterfacesInfo = ()=> {
                     // Name of the interface
                     let interfaceName = line[0]
                     // if the interface has a ':' in his name, is a virtual one
-                    if(interfaceName.indexOf(':')===-1){
-                        current.interface = interfaceName
-                    }else{
-                        interfaces.push(current)
-                        current = {}
-                    }
                 } else if (line[0] === 'inet' && line[1].indexOf('addr:') !== -1) {
                     //inet addr:200.112.228.124  Bcast:200.112.228.127  Mask:255.255.255.248
                     current.address = line[1].replace('addr:','')
@@ -86,7 +80,8 @@ export const Linux_getInterfacesInfo = ()=> {
                 return [interfaces, current]
             }, [[], {}])
             let [interfaces, lastInterface] = parsedInterfaces
-            resolve(interfaces)
+            // remove virtual interfaces
+            resolve(interfaces.map(int=>int.interface.indexOf(':')===-1))
         })
     })
 }
