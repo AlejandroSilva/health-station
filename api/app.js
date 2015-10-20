@@ -32,3 +32,5 @@ import errorsHandler  from './middlewares/errorsHandler.js'
 app.use(errorsHandler)
 
 export default app;
+
+// ..
