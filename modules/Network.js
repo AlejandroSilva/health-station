@@ -47,8 +47,7 @@ export const Linux_getInterfacesInfo = ()=> {
                 if (line[1] === 'Link') {
                     // eth0      Link encap:Ethernet  HWaddr 78:2b:cb:0d:51:e4
                     // Name of the interface
-                    let interfaceName = line[0]
-                    // if the interface has a ':' in his name, is a virtual one
+                    current.interface = line[0]
                 } else if (line[0] === 'inet' && line[1].indexOf('addr:') !== -1) {
                     //inet addr:200.112.228.124  Bcast:200.112.228.127  Mask:255.255.255.248
                     current.address = line[1].replace('addr:','')
@@ -81,7 +80,7 @@ export const Linux_getInterfacesInfo = ()=> {
             }, [[], {}])
             let [interfaces, lastInterface] = parsedInterfaces
             // remove virtual interfaces
-            resolve(interfaces.map(int=>int.interface.indexOf(':')===-1))
+            resolve(interfaces.filter(int=>int.interface.indexOf(':')===-1))
         })
     })
 }
