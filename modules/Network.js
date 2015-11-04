@@ -106,14 +106,15 @@ export const interfacesInfo = ()=>{
                     // calcular la diferencia de datos en el tiempo
                     resolve(
                         end.map((int, index)=>{
-                            int.RXpkts  -= start[index].RXpkts
-                            int.RXbytes -= start[index].RXbytes
-                            int.TXpkts  -= start[index].TXpkts
-                            int.TXbytes -= start[index].TXbytes
-                            int.time = libConfig.network.timeMeasured
-                            int.RXbitrate = bitrateForHumans(int.RXbytes, libConfig.network.timeMeasured)
-                            int.TXbitrate = bitrateForHumans(int.TXbytes, libConfig.network.timeMeasured)
-                            return int
+                            return {
+                                RXpkts: int.RXpkts - start[index].RXpkts,
+                                RXbytes: int.RXbytes - start[index].RXbytes,
+                                TXpkts: int.TXpkts - start[index].TXpkts,
+                                TXbytes: int.TXbytes - start[index].TXbytes,
+                                time: libConfig.network.timeMeasured,
+                                RXbitrate: bitrateForHumans(RXbytes, libConfig.network.timeMeasured),
+                                TXbitrate: bitrateForHumans(TXbytes, libConfig.network.timeMeasured)
+                            }
                         })
                     )
                 })
