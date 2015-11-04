@@ -54,6 +54,7 @@ export function discsIOInfo (req, res){
         error: 'not implemented'
     })
 }
+
 export function netIOInfo (req, res){
     promiseToResponse(interfacesInfo(), res)
 }
@@ -61,13 +62,15 @@ export function netIOInfo (req, res){
 export function pingInfo(req, res){
     promiseToResponse(Promise.all([ping.testNational(), ping.testIntrernational()]), res)
 }
+
 export function pingCustom(req, res){
     promiseToResponse(ping.testCustom(req.params.pingHost), res)
 }
 
 export function dicomEchoDefault(req, res){
-    dicomEcho(libConfig.dicom.host, libConfig.dicom.port, libConfig.dicom.eac)
+    promiseToResponse(dicomEcho(libConfig.dicom.host, libConfig.dicom.port, libConfig.dicom.eac), res)
 }
+
 export function dicomEchoCustom(req, res){
     let hostname = req.body.hostname
     let port = req.body.port

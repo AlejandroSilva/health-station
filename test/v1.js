@@ -14,7 +14,6 @@ import {
 import { libConfig } from '../config'
 
 describe('API v1', function(){
-/*
     it('GET /v1/node', function (done) {
         request(app)
             .get('/v1/node')
@@ -22,7 +21,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -31,9 +30,9 @@ describe('API v1', function(){
                 expect(node).to.have.property('title').that.is.an('string');
                 expect(node).to.have.property('nodeVersion').that.is.an('string');
                 expect(node).to.have.property('v8version').that.is.an('string');
-                done();
+                done()
             })
-    });
+    })
 
     it('GET /v1/cpu', function (done) {
         request(app)
@@ -42,7 +41,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -57,9 +56,9 @@ describe('API v1', function(){
                 expect(res.body).to.have.property('percentUser').that.is.an('number');
                 expect(res.body).to.have.property('percentSys').that.is.an('number');
                 expect(res.body).to.have.property('percentIdle').that.is.an('number');
-                done();
+                done()
             })
-    });
+    })
 
     it('GET /v1/mem', function (done) {
         request(app)
@@ -68,7 +67,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -78,9 +77,9 @@ describe('API v1', function(){
                 expect(res.body.free).to.be.an('string');
                 expect(res.body.used).to.be.an('string');
                 expect(res.body.percentUsed).to.be.an('number');
-                done();
+                done()
             })
-    });
+    })
 
     it('GET /v1/discs', function (done) {
         request(app)
@@ -89,7 +88,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res) {
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -106,9 +105,9 @@ describe('API v1', function(){
                 expect(disc0).to.have.property('blocksTotal').that.is.an('number');
                 expect(disc0).to.have.property('percentUsed').that.is.an('number');
 
-                done();
+                done()
             })
-    });
+    })
 
     //it('GET /v1/discsIO', function (done) {
     //    request(app)
@@ -117,16 +116,16 @@ describe('API v1', function(){
     //        .expect(200)
     //        .end(function(err, res){
     //            if(err){
-    //                done(err);
+    //                done(err)
     //                return;
     //            }
     //
     //            expect(res.body).to.be.an('object');
     //            expect(res.body).to.have.property('totalRequestPerSecond').that.is.an('number');
     //            expect(res.body).to.have.property('blockWritesPerSecond').that.is.an('number');
-    //            done();
+    //            done()
     //        })
-    //});
+    //})
 
     it('GET /v1/netIO', function (done) {
         request(app)
@@ -135,7 +134,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -147,9 +146,9 @@ describe('API v1', function(){
                 expect(interface0).to.have.property('TXbitrate').that.is.an('string');
                 expect(interface0).to.have.property('time').that.is.an('number');
                 expect(interface0).to.have.property('address').that.is.an('string');
-                done();
+                done()
             })
-    });
+    })
 
     it('GET /v1/ping', function (done) {
         request(app)
@@ -158,7 +157,7 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
@@ -171,9 +170,9 @@ describe('API v1', function(){
                 expect(pingInt).to.be.an('object');
                 expect(pingInt).to.have.property('avg').that.is.an('number');
                 expect(pingInt).to.have.property('address').that.is.an('string');
-                done();
+                done()
             })
-    });
+    })
 
     it('GET /v1/ping/jaidefinichon.cl', function (done) {
         request(app)
@@ -182,17 +181,17 @@ describe('API v1', function(){
             .expect(200)
             .end(function(err, res){
                 if(err){
-                    done(err);
+                    done(err)
                     return;
                 }
 
                 expect(res.body).to.be.an('object');
                 expect(res.body).to.have.property('address').that.is.equals('jaidefinichon.cl');
                 expect(res.body).to.have.property('avg').that.is.an('number');
-                done();
+                done()
             })
-    });
-    */
+    })
+
 
     it('DCMTK is installed', function (done) {
         dicomCheckInstalation()
@@ -204,7 +203,7 @@ describe('API v1', function(){
                 done()
             })
             .catch(done)
-    });
+    })
 
     it('DCMTK Correct echo', function (done) {
         dicomEcho(libConfig.dicom.host, libConfig.dicom.port, libConfig.dicom.eac)
@@ -231,7 +230,7 @@ describe('API v1', function(){
             })
             .catch(done)
     })
-    //
+
     it('DCMTK wrong port', function (done) {
         dicomEcho(libConfig.dicom.host, 9987, libConfig.dicom.eac)
             .then(response=>{
@@ -258,24 +257,20 @@ describe('API v1', function(){
             .catch(done)
     })
 
-    /*
     it('GET /v1/dicom', function (done) {
         request(app)
             .get('/v1/dicom')
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function(err, res){
-                if(err){
-                    done(err);
-                    return;
-                }
+                if(err) return done(err)
 
-                //completar la prueba
-                //expect(res.body).to.be.an('object');
-                //expect(res.body).to.have.property('address').that.is.equals('jaidefinichon.cl');
-                //expect(res.body).to.have.property('avg').that.is.an('number');
-                done();
+                expect(res.body).to.be.an('object')
+                expect(res.body).to.have.property('association').that.is.an('string')
+                expect(res.body).to.have.property('dicomEcho').that.is.an('string')
+                expect(res.body.association).to.be.equal('Accepted')
+                expect(res.body.dicomEcho).to.be.equal('Success')
+                done()
             })
-    });
-    */
+    })
 })
