@@ -56,7 +56,11 @@ export function discsIOInfo (req, res){
 }
 
 export function netIOInfo (req, res){
-    promiseToResponse(interfacesInfo(), res)
+    let promise = interfacesInfo()
+    promise
+        .then(console.log)
+        .catch(console.log)
+    promiseToResponse(promise, res)
 }
 
 export function pingInfo(req, res){

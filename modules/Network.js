@@ -6,7 +6,7 @@ import { bitrateForHumans } from '../lib/converter.js'
 import { libConfig } from '../config/index.js'
 
 // network IO, show the interfaces throughput
-export const OSX_getInterfacesInfo = ()=>{
+const OSX_getInterfacesInfo = ()=>{
     return new Promise((resolve, reject)=>{
         syncToArray('netstat', ['-ib'], (err, values)=> {
             if(err) return reject(err)
@@ -38,7 +38,7 @@ export const OSX_getInterfacesInfo = ()=>{
         })
     })
 }
-export const Linux_getInterfacesInfo = ()=> {
+const Linux_getInterfacesInfo = ()=> {
     return new Promise((resolve, reject)=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
             if(err) return reject(err)
