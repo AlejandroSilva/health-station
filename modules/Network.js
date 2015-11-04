@@ -128,4 +128,4 @@ export const interfacesInfo = ()=>{
 }
 // IO, interfaces + io + packs
 // OSX = netstat -ib
-// LINUX = ifconfig *ievvvvv
+// LINUX = ifconfig *ie
