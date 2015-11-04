@@ -1,4 +1,4 @@
-const version = 'v1.4.0'
+const version = 'v1.4.1'
 
 export let development = {
     port: 8383,

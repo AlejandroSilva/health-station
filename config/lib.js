@@ -1,4 +1,4 @@
-export const development = {
+const _development = {
     network: {
         timeMeasured: 8
     },
@@ -22,7 +22,8 @@ export const development = {
     }
 }
 
-export const production = Object.assign({}, development, {
+const _production = {
+    ..._development,
     network: {
         timeMeasured: 8
     },
@@ -31,9 +32,9 @@ export const production = Object.assign({}, development, {
         internationalHost: 'www.nytimes.com',
         attempts: 10
     }
-})
+}
 
-export const testing = Object.assign({}, development, {
+const _testing = {
     network: {
         timeMeasured: 2
     },
@@ -55,4 +56,8 @@ export const testing = Object.assign({}, development, {
         eac: 'MIRROR_FALP',
         timeout: 1 // secs
     }
-})
+}
+
+export const development = _development
+export const production = _production
+export const testing = _testing
