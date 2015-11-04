@@ -1,6 +1,6 @@
 {
   "name": "health-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "nodo heath para el envio de informacion del sistema",
   "main": "health-station.js",
   "scripts": {
