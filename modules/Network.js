@@ -103,6 +103,7 @@ export const interfacesInfo = ()=>{
             let promiseEnd = _getInterfacesInfo()
             Promise.all([promiseStart, promiseEnd])
                 .then(([start, end])=>{
+                    console.log(start, end)
                     // calcular la diferencia de datos en el tiempo
                     resolve(
                         end.map((int, index)=>{
