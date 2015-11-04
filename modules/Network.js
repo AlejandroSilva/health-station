@@ -104,19 +104,21 @@ export const interfacesInfo = ()=>{
             Promise.all([promiseStart, promiseEnd])
                 .then(([start, end])=>{
                     // calcular la diferencia de datos en el tiempo
-                    resolve(
-                        end.map((int, index)=>{
-                            return {
-                                RXpkts: int.RXpkts - start[index].RXpkts,
-                                RXbytes: int.RXbytes - start[index].RXbytes,
-                                TXpkts: int.TXpkts - start[index].TXpkts,
-                                TXbytes: int.TXbytes - start[index].TXbytes,
-                                time: libConfig.network.timeMeasured,
-                                RXbitrate: bitrateForHumans(RXbytes, libConfig.network.timeMeasured),
-                                TXbitrate: bitrateForHumans(TXbytes, libConfig.network.timeMeasured)
-                            }
-                        })
-                    )
+                    resolve( end.map((int, index)=>{
+                        let RXbytes = int.RXbytes - start[index].RXbytes
+                        let TXbytes = int.TXbytes - start[index].TXbytes
+                        return {
+                            interface: int.interface,
+                            address: int.address,
+                            RXpkts: int.RXpkts - start[index].RXpkts,
+                            RXbytes,
+                            TXpkts: int.TXpkts - start[index].TXpkts,
+                            TXbytes,
+                            time: libConfig.network.timeMeasured,
+                            RXbitrate: bitrateForHumans(RXbytes, libConfig.network.timeMeasured),
+                            TXbitrate: bitrateForHumans(TXbytes, libConfig.network.timeMeasured)
+                        }
+                    }))
                 })
                 .catch(reject)
 

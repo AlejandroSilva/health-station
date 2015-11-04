@@ -45,7 +45,7 @@ export const testing = {
     ping: {
         nationalHost: 'www.emol.com',
         internationalHost: 'www.nytimes.com',
-        attempts: 2
+        attempts: 1
     },
     cpu: {
         timeMeasured: 2
