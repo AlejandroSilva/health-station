@@ -48,5 +48,11 @@ export const testing = Object.assign({}, development, {
     },
     cpu: {
         timeMeasured: 2
+    },
+    dicom: {
+        host: 'falp.biopacs.com',
+        port: 11112,
+        eac: 'MIRROR_FALP',
+        timeout: 1 // secs
     }
 })
