@@ -10,6 +10,7 @@ import {
     dicomCheckInstalation,
     dicomEcho
 } from '../modules/Dicom.js'
+import { interfacesInfo } from '../modules/Network'
 // Config
 import { libConfig } from '../config'
 
@@ -126,6 +127,22 @@ describe('API v1', function(){
     //            done()
     //        })
     //})
+
+    it('Module Network: interfacesInfo()', function (done) {
+        interfacesInfo()
+            .then(data=>{
+                expect(data).to.be.an('array');
+                let interface0 = data[0];
+                expect(interface0).to.be.an('object');
+                expect(interface0).to.have.property('interface').that.is.an('string');
+                expect(interface0).to.have.property('RXbitrate').that.is.an('string');
+                expect(interface0).to.have.property('TXbitrate').that.is.an('string');
+                expect(interface0).to.have.property('time').that.is.an('number');
+                expect(interface0).to.have.property('address').that.is.an('string');
+                done()
+            })
+            .catch(done)
+    })
 
     it('GET /v1/netIO', function (done) {
         request(app)

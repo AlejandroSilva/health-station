@@ -1,4 +1,4 @@
-const _development = {
+export const development = {
     network: {
         timeMeasured: 8
     },
@@ -22,8 +22,8 @@ const _development = {
     }
 }
 
-const _production = {
-    ..._development,
+export const production = {
+    ...development,
     network: {
         timeMeasured: 8
     },
@@ -34,7 +34,7 @@ const _production = {
     }
 }
 
-const _testing = {
+export const testing = {
     network: {
         timeMeasured: 2
     },
@@ -57,7 +57,3 @@ const _testing = {
         timeout: 1 // secs
     }
 }
-
-export const development = _development
-export const production = _production
-export const testing = _testing
