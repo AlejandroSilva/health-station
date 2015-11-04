@@ -23,6 +23,9 @@ export const development = {
 }
 
 export const production = Object.assign({}, development, {
+    network: {
+        timeMeasured: 8
+    },
     ping: {
         nationalHost: 'www.emol.com',
         internationalHost: 'www.nytimes.com',
