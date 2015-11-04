@@ -13,6 +13,12 @@ export const development = {
     },
     cpu: {
         timeMeasured: 10
+    },
+    dicom: {
+        host: 'falp.biopacs.com',
+        port: 11112,
+        eac: 'MIRROR_FALP',
+        timeout: 2 // secs
     }
 }
 
@@ -35,7 +41,7 @@ export const testing = Object.assign({}, development, {
     ping: {
         nationalHost: 'www.emol.com',
         internationalHost: 'www.nytimes.com',
-        attempts: 2,
+        attempts: 2
     },
     cpu: {
         timeMeasured: 2

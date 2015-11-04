@@ -8,6 +8,7 @@ import { interfacesInfo } from '../../modules/Network.js'
 import { discFree } from '../../modules/Disc.js'
 import { memData } from '../../modules/Mem.js'
 import { cpuData } from '../../modules/Cpu.js'
+import { dicomCheckInstalation, dicomEcho } from '../../modules/Dicom.js'
 
 //let sar  = new Sar(libConfig.sar);
 let ping = new Ping(libConfig.ping);
@@ -62,6 +63,16 @@ export function pingInfo(req, res){
 }
 export function pingCustom(req, res){
     promiseToResponse(ping.testCustom(req.params.pingHost), res)
+}
+
+export function dicomEchoDefault(req, res){
+    dicomEcho(libConfig.dicom.host, libConfig.dicom.port, libConfig.dicom.eac)
+}
+export function dicomEchoCustom(req, res){
+    let hostname = req.body.hostname
+    let port = req.body.port
+    let aec = req.body.aec
+    promiseToResponse(dicomEcho(hostname, port, aec), res)
 }
 
 export function allInfo(req, res, next){

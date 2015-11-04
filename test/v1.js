@@ -1,12 +1,20 @@
-import assert from 'assert';
-import request from 'supertest';
-import chai from 'chai';
-let expect = chai.expect;
+import assert from 'assert'
+import request from 'supertest'
+import chai from 'chai'
+let expect = chai.expect
 
-import app from '../api/app.js';
+// Express
+import app from '../api/app.js'
+// Dicom Module
+import {
+    dicomCheckInstalation,
+    dicomEcho
+} from '../modules/Dicom.js'
+// Config
+import { libConfig } from '../config'
 
 describe('API v1', function(){
-
+/*
     it('GET /v1/node', function (done) {
         request(app)
             .get('/v1/node')
@@ -184,4 +192,90 @@ describe('API v1', function(){
                 done();
             })
     });
-});
+    */
+
+    it('DCMTK is installed', function (done) {
+        dicomCheckInstalation()
+            .then(response=>{
+                expect(response).to.be.an('object')
+                expect(response.command).to.be.an('string')
+                expect(response.version).to.be.an('string')
+                expect(response.date).to.be.an('string')
+                done()
+            })
+            .catch(done)
+    });
+
+    it('DCMTK Correct echo', function (done) {
+        dicomEcho(libConfig.dicom.host, libConfig.dicom.port, libConfig.dicom.eac)
+            .then(response=>{
+                expect(response).to.be.an('object')
+                expect(response).to.have.property('association').that.is.an('string')
+                expect(response).to.have.property('dicomEcho').that.is.an('string')
+                expect(response.association).to.be.equal('Accepted')
+                expect(response.dicomEcho).to.be.equal('Success')
+                done()
+            })
+            .catch(done)
+    })
+
+    it('DCMTK wrong hostname', function (done) {
+        dicomEcho('www.invalidhost.com', libConfig.dicom.port, libConfig.dicom.eac)
+            .then(response=>{
+                expect(response).to.be.an('object')
+                expect(response).to.have.property('association').that.is.an('string')
+                expect(response).to.have.property('dicomEcho').that.is.an('string')
+                expect(response.association).to.be.equal('Request Failed: 0006:031b Failed to establish association')
+                expect(response.dicomEcho).to.be.equal('Unknown')
+                done()
+            })
+            .catch(done)
+    })
+    //
+    it('DCMTK wrong port', function (done) {
+        dicomEcho(libConfig.dicom.host, 9987, libConfig.dicom.eac)
+            .then(response=>{
+                expect(response).to.be.an('object')
+                expect(response).to.have.property('association').that.is.an('string')
+                expect(response).to.have.property('dicomEcho').that.is.an('string')
+                expect(response.association).to.be.equal('Request Failed: 0006:031b Failed to establish association')
+                expect(response.dicomEcho).to.be.equal('Unknown')
+                done()
+            })
+            .catch(done)
+    })
+
+    it('DCMTK wrong AEC', function (done) {
+        dicomEcho(libConfig.dicom.host, libConfig.dicom.port, 'INVALID_AEC')
+            .then(response=>{
+                expect(response).to.be.an('object')
+                expect(response).to.have.property('association').that.is.an('string')
+                expect(response).to.have.property('dicomEcho').that.is.an('string')
+                expect(response.association).to.be.equal('Rejected: Called AE Title Not Recognized')
+                expect(response.dicomEcho).to.be.equal('Unknown')
+                done()
+            })
+            .catch(done)
+    })
+
+    /*
+    it('GET /v1/dicom', function (done) {
+        request(app)
+            .get('/v1/dicom')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function(err, res){
+                if(err){
+                    done(err);
+                    return;
+                }
+
+                //completar la prueba
+                //expect(res.body).to.be.an('object');
+                //expect(res.body).to.have.property('address').that.is.equals('jaidefinichon.cl');
+                //expect(res.body).to.have.property('avg').that.is.an('number');
+                done();
+            })
+    });
+    */
+})

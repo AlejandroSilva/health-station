@@ -1,17 +1,18 @@
-import express from 'express';
-import * as controller from './controller.js';
+import express from 'express'
+import * as controller from './controller.js'
 
-let router = express.Router();
-router.get('/', controller.allInfo);
-router.get('/node', controller.nodeInfo);
-router.get('/cpu', controller.cpuInfo);
-router.get('/mem', controller.memInfo);
-router.get('/discs', controller.discInfo);
-router.get('/discsIO', controller.discsIOInfo);
-router.get('/netIO', controller.netIOInfo);
-router.get('/ping', controller.pingInfo);
-router.get('/ping/:pingHost', controller.pingCustom);
-//router.get('/dicom', controller.getCpu);
+let router = express.Router()
+router.get('/', controller.allInfo)
+router.get('/node', controller.nodeInfo)
+router.get('/cpu', controller.cpuInfo)
+router.get('/mem', controller.memInfo)
+router.get('/discs', controller.discInfo)
+router.get('/discsIO', controller.discsIOInfo)
+router.get('/netIO', controller.netIOInfo)
+router.get('/ping', controller.pingInfo)
+router.get('/ping/:pingHost', controller.pingCustom)
+router.get('/dicom', controller.dicomEchoDefault)
+router.post('/dicom', controller.dicomEchoCustom)
 
 router.param('pingHost', function (req, res, next, pingHost) {
     if(!pingHost || pingHost.length==0){
@@ -19,8 +20,8 @@ router.param('pingHost', function (req, res, next, pingHost) {
             error: 'necesita un host'
         })
     }else{
-        next();
+        next()
     }
-});
+})
 
-export default router;
+export default router

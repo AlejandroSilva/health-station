@@ -1,5 +1,5 @@
 import os from 'os'
-import { sync, syncToArray, async } from '../lib/spawner.js'
+import { syncToArray } from '../lib/spawner.js'
 import { bitrateForHumans } from '../lib/converter.js'
 
 // Configuration
