@@ -41,7 +41,7 @@ To run and keep working the app even on errors, is used [PM2](https://github.com
 I'ts higly recommender to install both as global:
 
 ```
-# npm install -g babel pm2
+# npm install -g babel babel-cli pm2
 ```
 
 ### Clone the repo

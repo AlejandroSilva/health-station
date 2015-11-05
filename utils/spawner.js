@@ -1,5 +1,11 @@
 //https://github.com/danielkrainas/node-netstat/blob/master/lib/activators.js
 
+const options = {
+    env: {
+        'LC_ALL': 'C'
+    }
+}
+
 import childProcess from 'child_process'
 import {
     emitLines,
@@ -13,7 +19,7 @@ export const sync = (cmd, args, makeLineHandler, done)=>{
         processing = false
     })
 
-    var proc = childProcess.spawnSync(cmd, args);
+    var proc = childProcess.spawnSync(cmd, args, options)
     if (proc.error) {
         done(proc.error)
     } else {
@@ -25,6 +31,7 @@ export const sync = (cmd, args, makeLineHandler, done)=>{
         done(null, proc.stdout, proc.stderr)
     }
 }
+
 
 export const syncToArray = (cmd, args, done)=>{
     var proc = childProcess.spawnSync(cmd, args)
