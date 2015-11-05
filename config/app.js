@@ -1,16 +1,16 @@
 const version = 'v1.5.2'
 
-export let development = {
-    port: 8383,
+export const development = {
+    port: process.env.PORT || 8383,
     version
 }
 
-export let production = {
-    port: 8008,
+export const production = {
+    port: process.env.PORT || 8008,
     version
 }
 
-export let testing = {
-    port: 3003,
+export const testing = {
+    port: process.env.PORT || 3003,
     version
 }

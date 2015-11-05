@@ -7,34 +7,32 @@ export const development = {
         count: 3
     },
     ping: {
-        nationalHost: 'www.plp.com',
-        internationalHost: 'www.nytimes.com',
+        nationalHost: process.env.PING_NATIONAL || 'www.plp.com',
+        internationalHost: process.env.PING_INTERNATIONAL || 'www.9gag.com',
         attempts: 6
     },
     cpu: {
         timeMeasured: 10
     },
     dicom: {
-        host: 'falp.biopacs.com',
-        port: 11112,
-        eac: 'MIRROR_FALP',
-        timeout: 2 // secs
+        host: process.env.DICOM_HOST || 'falp.biopacs.com',
+        port: process.env.DICOM_PORT || 11112,
+        eac:  process.env.DICOM_EAC || 'MIRROR_FALP',
+        timeout: process.env.DICOM_TIMEOUT || 2 // secs
     }
 }
 
 export const production = {
     ...development,
-    network: {
-        timeMeasured: 8
-    },
     ping: {
-        nationalHost: 'www.emol.com',
-        internationalHost: 'www.nytimes.com',
+        nationalHost: process.env.PING_NATIONAL || 'www.emol.com',
+        internationalHost: process.env.PING_INTERNATIONAL || 'www.nytimes.com',
         attempts: 10
     }
 }
 
 export const testing = {
+    ...development,
     network: {
         timeMeasured: 2
     },
@@ -43,17 +41,17 @@ export const testing = {
         count: 1
     },
     ping: {
-        nationalHost: 'www.emol.com',
-        internationalHost: 'www.nytimes.com',
+        nationalHost: process.env.PING_NATIONAL || 'www.gob.cl',
+        internationalHost: process.env.PING_INTERNATIONAL || 'www.speedtest.net',
         attempts: 1
     },
     cpu: {
         timeMeasured: 2
     },
     dicom: {
-        host: 'falp.biopacs.com',
-        port: 11112,
-        eac: 'MIRROR_FALP',
-        timeout: 1 // secs
+        host: process.env.DICOM_HOST || 'falp.biopacs.com',
+        port: process.env.DICOM_PORT || 11112,
+        eac: process.env.DICOM_EAC || 'MIRROR_FALP',
+        timeout: process.env.DICOM_TIMEOUT || 1 // secs
     }
 }
