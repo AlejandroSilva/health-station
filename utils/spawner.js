@@ -34,7 +34,7 @@ export const sync = (cmd, args, makeLineHandler, done)=>{
 
 
 export const syncToArray = (cmd, args, done)=>{
-    var proc = childProcess.spawnSync(cmd, args)
+    var proc = childProcess.spawnSync(cmd, args, options)
     if (proc.error) {
         done(proc.error)
     } else {
@@ -51,7 +51,7 @@ export const syncToArray = (cmd, args, done)=>{
 
 
 export const async = (cmd, args, makeLineHandler, done)=>{
-    var proc = childProcess.spawn(cmd, args)
+    var proc = childProcess.spawn(cmd, args, options)
     var lineHandler = makeLineHandler(()=>{
         proc.stdout.removeListener('line', lineHandler)
         proc.kill()
