@@ -2,7 +2,8 @@
 
 const options = {
     env: {
-        'LC_ALL': 'C'
+        ...process.env,
+        LC_ALL: 'C'
     }
 }
 
