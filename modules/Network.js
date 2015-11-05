@@ -1,6 +1,6 @@
 import os from 'os'
-import { syncToArray } from '../lib/spawner.js'
-import { bitrateForHumans } from '../lib/converter.js'
+import { syncToArray } from '../utils/spawner.js'
+import { bitrateForHumans } from '../utils/converter.js'
 
 // Configuration
 import { libConfig } from '../config/index.js'

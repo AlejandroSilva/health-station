@@ -5,7 +5,7 @@
 
 // Configuration
 //import { libConfig } from '../config/index.js'
-import { syncToArray } from '../lib/spawner.js'
+import { syncToArray } from '../utils/spawner.js'
 
 export const dicomCheckInstalation = ()=> {
     return new Promise((resolve, reject)=>{

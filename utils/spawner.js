@@ -5,7 +5,7 @@ import {
     emitLines,
     parseLines,
     linesToArray
-} from './utils.js'
+} from './parsers.js'
 
 export const sync = (cmd, args, makeLineHandler, done)=>{
     var processing = true
