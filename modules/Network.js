@@ -41,7 +41,6 @@ const OSX_getInterfacesInfo = ()=>{
 const Linux_getInterfacesInfo = ()=> {
     return new Promise((resolve, reject)=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
-            console.log(err, values)
             if(err) return reject(err)
 
             const parsedInterfaces = values.reduce(([interfaces, current], line)=> {
