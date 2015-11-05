@@ -4,6 +4,6 @@ npm-debug*
 
 .DS_Store
 
-app.dev.env
-app.prod.env
-app.test.env
+/app.test.env
+/app.prod.env
+/app.dev.env
