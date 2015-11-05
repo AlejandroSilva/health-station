@@ -41,7 +41,6 @@ const OSX_getInterfacesInfo = ()=>{
 const Linux_getInterfacesInfo = ()=> {
     return new Promise((resolve, reject)=> {
         syncToArray('netstat', ['-ie'], (err, values)=> {
-            console.log(values)
             if(err) return reject(err)
 
             const parsedInterfaces = values.reduce(([interfaces, current], line)=> {
@@ -67,7 +66,7 @@ const Linux_getInterfacesInfo = ()=> {
                     current.TXbytes = parseInt(line[5].replace('bytes:',''))
                 }
 
-                else if (line[0].indexOf('Interrupt') !== -1) {
+                else if (line[0].indexOf('Interrupt:')!==-1 || line[0].indexOf('Memory:')!==-1) {
                     // Interrupt:48 Memory000:d4000000-d4012800
                     // las line with information about a interface, the following info corresponds to another interface
                     interfaces.push(current)
@@ -104,7 +103,6 @@ export const interfacesInfo = ()=>{
             let promiseEnd = _getInterfacesInfo()
             Promise.all([promiseStart, promiseEnd])
                 .then(([start, end])=>{
-                    console.log(start, end)
                     // calcular la diferencia de datos en el tiempo
                     resolve( end.map((int, index)=>{
                         let RXbytes = int.RXbytes - start[index].RXbytes
