@@ -2,7 +2,6 @@
 import path from 'path'
 import env from 'node-env-file'
 
-
 let appConfig = {}
 let libConfig = {}
 let enviroment = process.env.NODE_ENV || 'development'
