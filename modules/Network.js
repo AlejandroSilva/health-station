@@ -9,6 +9,7 @@ import { libConfig } from '../config/index.js'
 const OSX_getInterfacesInfo = ()=>{
     return new Promise((resolve, reject)=>{
         syncToArray('netstat', ['-ib'], (err, values)=> {
+            console.log(values)
             if(err) return reject(err)
 
             const interfaces =
