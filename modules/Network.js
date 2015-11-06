@@ -64,18 +64,21 @@ const Linux_getInterfacesInfo = ()=> {
                     // RX bytes:648494656210 (648.4 GB)  TX bytes:98727039354 (98.7 GB)
                     current.RXbytes = parseInt(line[1].replace('bytes:',''))
                     current.TXbytes = parseInt(line[5].replace('bytes:',''))
-                }
-
-                else if (line[0].indexOf('Interrupt:')!==-1 || line[0].indexOf('Memory:')!==-1) {
-                    // Interrupt:48 Memory000:d4000000-d4012800
-                    // las line with information about a interface, the following info corresponds to another interface
+                    // Dirty fix
                     interfaces.push(current)
                     current = {}
+                }
 
-                } else {
+//                else if (line[0].indexOf('Interrupt:')!==-1 || line[0].indexOf('Memory:')!==-1) {
+                    // Interrupt:48 Memory000:d4000000-d4012800
+                    // las line with information about a interface, the following info corresponds to another interface
+//                    interfaces.push(current)
+//                    current = {}
+
+//                } else {
                     // other line, ignored
                     //console.log(line)
-                }
+//                }
                 return [interfaces, current]
             }, [[], {}])
             let [interfaces, lastInterface] = parsedInterfaces
