@@ -1,4 +1,4 @@
-const version = 'v1.6.0'
+const version = 'v1.6.1'
 
 export const development = {
     port: process.env.PORT || 8383,
